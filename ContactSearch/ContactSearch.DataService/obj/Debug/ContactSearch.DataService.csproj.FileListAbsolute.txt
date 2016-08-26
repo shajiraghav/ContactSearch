@@ -1,0 +1,5 @@
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DataService\bin\Debug\ContactSearch.DataService.dll
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DataService\bin\Debug\ContactSearch.DataService.pdb
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DataService\obj\Debug\ContactSearch.DataService.dll
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DataService\obj\Debug\ContactSearch.DataService.pdb
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DataService\obj\Debug\ContactSearch.DataService.csprojResolveAssemblyReference.cache

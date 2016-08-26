@@ -1,0 +1,80 @@
+﻿<Window x:Class="ContactSearch.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ContactSearch"       
+        xmlns:ctrls="clr-namespace:UIControls;assembly=SearchTextBox"
+        xmlns:cnv="clr-namespace:ContactSearch.Converters"        
+        mc:Ignorable="d"
+        Title="Contact Search by Shaji" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight" ResizeMode="NoResize" Background="LightBlue">
+    <Window.Resources>
+        <cnv:ImageConverter x:Key="imgConverter"/>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+
+        <Style x:Key="headerTemplate" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="FontWeight"  Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="BorderBrush" Value="Red"/>
+        </Style>
+        <Style x:Key="controlSeperator" TargetType="Separator">
+            <Setter Property="Width" Value="4"/>
+            <Setter Property="Opacity" Value="0"/>
+        </Style>
+        <DataTemplate x:Key="tooltiptemplate">
+            <TextBlock Text="Photo" TextDecorations="Underline" Foreground="Blue">
+                <TextBlock.ToolTip>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="{Binding Path=Photo, Converter={StaticResource imgConverter}}"/>
+                        <TextBlock Background="LightCoral" Foreground="Black">                            
+                            <Run Text="{Binding FirstName}"/>                            
+                            <Run Text="{Binding MiddleName}"/>
+                            <Run Text="{Binding LastName}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </TextBlock.ToolTip>        
+         </TextBlock>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Width="Auto" Margin="10" IsEnabled="{Binding UiEnable}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="100*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <ctrls:SearchTextBox Grid.Column="0" Grid.Row="0"
+                                 x:Name="searchBox" Text="{Binding SearchKey, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"   Height="25" Width="250" 
+                                 Background="AliceBlue" HorizontalAlignment="Left" Command="{Binding SearchCommand}" 
+                                 CommandTarget="{Binding ElementName=searchBox, Path=CommandTarget}"
+                                 SelectedItems="{Binding SearchFields, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Top" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
+            <Label Height="23">Load all data:</Label>
+            <CheckBox Height="15" IsChecked="{Binding LoadAllData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      IsEnabled="{Binding EnableDataCountInput}" Command="{Binding LoadAllDataCommand}"/>
+            <Label Height="23">Data Count:</Label>
+            <TextBox Text="{Binding DataCount, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Height="22" Width="50" BorderBrush="Black" BorderThickness="0"
+                     IsEnabled="{Binding EnableDataCountInput}"/>
+            <Separator Style="{StaticResource controlSeperator}"/>
+            <Button x:Name="generateData" Height="25" Width="100" Command="{Binding GenerateButtonCommand}" Content="Generate data" Margin="0,8"/>
+            <Separator Style="{StaticResource controlSeperator}"/>
+            <Button x:Name="deleteData" Height="25" Width="100" Command="{Binding DeleteButtonCommand}" Content="Delete data" Margin="0,8"/>
+        </StackPanel>
+
+        <ProgressBar Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Height="4" 
+             Value="{Binding CurrentProgress, Mode=OneWay}" Visibility="{Binding ProgressVisibility, Converter={StaticResource VisibilityConverter}, 
+             FallbackValue=Hidden}" Minimum="0" Maximum="100" IsIndeterminate="{Binding ProgressVisibility}" Foreground="Blue"/>
+
+        <DataGrid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="4" GridLinesVisibility="All" Width="Auto" Name="SearchResultGrid" AutoGenerateColumns="True" 
+              HorizontalAlignment="Left"  VerticalContentAlignment="Top"  HorizontalContentAlignment="Stretch" 
+              VerticalAlignment="Top" AutoGeneratingColumn="SearchResultGrid_AutoGeneratingColumn">
+        </DataGrid>
+    </Grid>
+</Window>

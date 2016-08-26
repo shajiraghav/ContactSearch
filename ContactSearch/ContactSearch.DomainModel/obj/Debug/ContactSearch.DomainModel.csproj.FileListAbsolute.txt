@@ -1,0 +1,4 @@
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DomainModel\bin\Debug\ContactSearch.DomainModel.dll
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DomainModel\bin\Debug\ContactSearch.DomainModel.pdb
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DomainModel\obj\Debug\ContactSearch.DomainModel.dll
+C:\_SHAJI\Interview\HealthCatalyst\Project\ContactSearch\ContactSearch.DomainModel\obj\Debug\ContactSearch.DomainModel.pdb
